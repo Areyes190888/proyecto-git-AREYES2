@@ -1,0 +1,130 @@
+Feature: Validar flujo de creación de nuevos funcionarios desde el boton Funcionario con usuario de red
+
+Background: El usuario se encuentra en PPE en la opción MAF 
+			and Modulo de administración de funcionarios
+			and opción Funcionario
+
+Scenario: Validar el flujo de crear funcionario con usuario de red.
+
+Given Me encuentro en el menú de funcionarios
+When doy clic en Crear
+	and clic Con usuario de red
+Then se habilita pantalla de Crear funcionario con usuario de red
+
+Scenario Outline: Crear un funcionario con usuario de red
+
+Given me encuentro en patalla de Crear Funcionario con usuario de red
+When digito en la casilla Usuario NT un usuario de red
+	and hago clic en Cargar.
+Then se debe habilitar una ventan emergente con los datos básicos Nombre, área, Cargo,Dominio
+and doy clic en SI
+then se debe habilitar pantalla de Información General
+and diligenciar los campos sexo,fecha ingreso, fecha expedición (documento),lugar expedición (documento)
+	lugar de nacimiento, fecha de nacimiento, Teléfono celular, dirección personal, tipo de contrato, tipo de vinculación,
+	compañía, cargo, tipo de firma, Jefe, división, dirección, gerencia, área,centro de costos de ubicación, centro de costos,
+	oficina de atención de operaciones 
+	
+and doy clic en guardar
+then el usuario debe quedar creado de forma exitosa.
+
+
+Feature: Validar flujo de creación de nuevos funcionarios desde el boton Funcionario con documento de identidad
+
+Background: El funcionario a crear no debe tener un usuario de red asignado. 
+
+Scenario: Validar el flujo de funcionario con Número de documento.
+
+Given Me encuentro en el menú de funcionarios
+When doy clic en Crear
+	and clic en Con documento
+Then se habilita pantalla de Crear funcionario con número de documento
+
+Scenario Outline: Crear un funcionario con número de documento
+
+Given me encuentro en patalla de Crear Funcionario con número de documento
+When digito en la casilla Usuario NT un número de documento
+	and hago clic en Cargar.
+Then se debe habilitar una ventan emergente con los datos básicos Nombre, área, Cargo,Dominio
+and doy clic en SI
+then se debe habilitar pantalla de Información General
+and diligenciar los campos sexo,fecha ingreso, fecha expedición (documento),lugar expedición (documento)
+	lugar de nacimiento, fecha de nacimiento, Teléfono celular, dirección personal, tipo de contrato, tipo de vinculación,
+	compañía, cargo, tipo de firma, Jefe, división, dirección, gerencia, área,centro de costos de ubicación, centro de costos,
+	oficina de atención de operaciones 
+	
+and doy clic en guardar
+then el usuario debe quedar creado de forma exitosa.
+
+scenario outline: Ingresar al flujo de creación con documento un funcionario con usuario de red existente
+
+Given Me encuentro en el menú de funcionarios
+When doy clic en Crear
+	and clic en Con documento
+Then se habilita pantalla de Crear funcionario con número de documento
+and ingresar el número de documento 
+then debe mostrar una ventana emergente con el mensaje  "Existe en Idap y no en MAF
+and doy clic en aceptar
+then debe mostrar una ventana emergente con el mensaje "El funcionario se encuentra en directorio activo con usuario NT" 
+
+
+
+
+Feature: Validar flujo de Buscar funcionario
+
+Background: El usuario se encuentra en PPE en la opción MAF 
+			and Modulo de administración de funcionarios
+			and opción Funcionario
+			
+			
+Scenario: Buscar un funcionario
+
+Given me encuentro en el menú Funcionario	
+when doy clic en buscar 
+	and digito el usuario de red	
+	and doy clic en Buscar
+then se debe habilitar una pantalla Consulta funcionario-Información general
+
+Feature: Editar información de funcionarios
+
+Background ejecutar caso de Buscar un funcionario
+
+Scenario editar información de funcionario
+given me encuentro en Consulta funcionario-Información general
+when doy clic en Editar
+and modifico un campo
+and doy clic en guardar
+then se muestra una ventana emergente con titulo Editar funcionario y mensaje Edición exitosa. 
+and doy clic en OK
+
+Feature: Eliminar un funcionario
+
+Background ejecutar caso de Buscar un funcionario
+
+Scenario outline Eliminar información funcionario
+given me encuentro en Consulta funcionario-Información general
+when doy clic en Eliminar
+and doy clic en Eliminar infomación
+then se muestra una ventana emergente con titulo Editar funcionario y mensaje Eliminación exitosa. 
+and doy clic en OK
+
+Scenario Outline Eliminar nodo funcionario 
+given me encuentro en Consulta funcionario-Información general
+when doy clic en Eliminar
+and doy clic en Eliminar Nodo
+then se muestra una ventana emergente con titulo Editar funcionario y mensaje Eliminación exitosa. 
+and doy clic en OK
+
+Feature: Realizar movimiento de un funcionario
+
+Background: El usuario se encuentra en PPE en la opción MAF 
+			and Modulo de administración de funcionarios
+			and opción Funcionario
+			
+
+scenario: Reemplazar un funcionario
+
+
+
+Scenario: Realizar un movimiento de funcionario pendiente
+
+
